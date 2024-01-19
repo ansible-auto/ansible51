@@ -25,7 +25,7 @@ PASTE MUNA TO SA MGA NETWORK DEVICES PARA MA TELNET
 @SWITCH:
 
 config t
-   hostname COREbaba41
+   hostname COREbaba51
    enable secret pass
    service password-encryption
    no logging console
@@ -40,27 +40,27 @@ config t
    Int Gi 0/1
      no shutdown
 	  no switchport
-	  ip add 10.41.41.4 255.255.255.0
+	  ip add 10.51.51.4 255.255.255.0
    Int Vlan 1
      no shutdown
-	 ip add 10.41.1.4 255.255.255.0
+	 ip add 10.51.1.4 255.255.255.0
 	 description MGMTDATA
    Int Vlan 10
      no shutdown
-	 ip add 10.41.10.4 255.255.255.0
+	 ip add 10.51.10.4 255.255.255.0
 	 description WIRELESS
    Int Vlan 50
      no shutdown
-	 ip add 10.41.50.4 255.255.255.0
+	 ip add 10.51.50.4 255.255.255.0
 	 description IPCCTV
    Int Vlan 100
      no shutdown
-	 ip add 10.41.100.4 255.255.255.0
+	 ip add 10.51.100.4 255.255.255.0
 	 description VOICEVLAN
         end
 conf t
 ip routing 
-ip route 0.0.0.0 0.0.0.0 10.41.41.1
+ip route 0.0.0.0 0.0.0.0 10.51.51.1
 end
        
 
@@ -69,7 +69,7 @@ end
 @CUCM:
 
 config t
-   hostname CUCM41
+   hostname CUCM51
    enable secret pass
    service password-encryption
    no logging console
@@ -83,11 +83,11 @@ config t
    login local
    Int Fa 0/0
      no shutdown
-	 ip add 10.41.100.8 255.255.255.0 
+	 ip add 10.51.100.8 255.255.255.0 
 	 end
 conf t
 ip routing
-ip route 0.0.0.0 0.0.0.0 10.41.100.4
+ip route 0.0.0.0 0.0.0.0 10.51.100.4
 end
 
 
@@ -96,7 +96,7 @@ end
 @EDGE ROUTER:
 
 config t
-   hostname EDGE41
+   hostname EDGE51
    enable secret pass
    service password-encryption
    no logging console
@@ -110,19 +110,19 @@ config t
     login local
    Int Gi 0/0/0
      description INSIDE
-     ip add 10.41.41.1 255.255.255.0
+     ip add 10.51.51.1 255.255.255.0
 	 no shutdown
    Int Gi 0/0/1
      description OUTSIDE
-	 ip add 200.0.0.41 255.255.255.0
+	 ip add 200.0.0.51 255.255.255.0
 	 no shutdown
    Int Loopback 0
      description VIRTUALIP
-	 ip add 41.0.0.1 255.255.255.255
+	 ip add 51.0.0.1 255.255.255.255
  end
 conf t
 ip routing
-ip route 10.41.0.0 255.255.0.0 10.41.41.4
+ip route 10.51.0.0 255.255.0.0 10.51.51.4
 end
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -130,15 +130,15 @@ OPEN CMD
 
 #ITO ILAGAY KAY CMD
 
-route add 10.41.0.0 mask 255.255.0.0 10.41.1.4
-route add 200.0.0.0 mask 255.255.255.0 10.41.1.4
-route add 10.0.0.0 mask 255.0.0.0 10.41.1.4
+route add 10.51.0.0 mask 255.255.0.0 10.51.1.4
+route add 200.0.0.0 mask 255.255.255.0 10.51.1.4
+route add 10.0.0.0 mask 255.0.0.0 10.51.1.4
 
-route delete 10.41.0.0 (OPTIONAL)
+route delete 10.51.0.0 (OPTIONAL)
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 AUTO-WIFI
 
-telnet 10.41.10.3
+telnet 10.51.10.3
 admin
 pass
 enable
@@ -152,16 +152,16 @@ username admin privilege 15 secret pass
 #nano hosts
 
 [switch]
-10.41.1.4
+10.51.1.4
 
 [cucm]
-10.41.100.8
+10.51.100.8
 
 [edge]
-10.41.41.1
+10.51.51.1
 
 [wifi]
-10.41.10.3
+10.51.10.3
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -169,13 +169,13 @@ SWITCH
 
 conf t
 ip routing 
-ip route 0.0.0.0 0.0.0.0 10.41.41.1
+ip route 0.0.0.0 0.0.0.0 10.51.51.1
 
 CUCM
 
 conf t
 ip routing
-ip route 0.0.0.0 0.0.0.0 10.41.100.4
+ip route 0.0.0.0 0.0.0.0 10.51.100.4
 
 
 
